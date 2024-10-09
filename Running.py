@@ -134,3 +134,5 @@ if __name__ == "__main__":
         caption = main(image_path, mapping_path)
         st.subheader("Generated Caption:")
         st.write(caption)
+
+
