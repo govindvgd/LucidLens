@@ -25,8 +25,13 @@ class VideoTransformer(VideoTransformerBase):
             output = self.model_path
             gdown.download(url, output, quiet=False)
         
-        self.mapping_path = "mapping.pkl"  # Update with your mapping path
+        # Check again if the file exists after the download
+        if not os.path.exists(self.model_path):
+            raise FileNotFoundError(f"Model file not found at {self.model_path}. Download failed or file is missing.")
+        
+        # Now load the model
         self.model = tf.keras.models.load_model(self.model_path)
+        self.mapping_path = "mapping.pkl"  # Update with your mapping path
         self.mapping = self.load_mapping(self.mapping_path)
         self.tokenizer = self.create_tokenizer(self.mapping)
 
