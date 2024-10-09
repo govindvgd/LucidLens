@@ -10,7 +10,7 @@ import cv2
 from streamlit_webrtc import webrtc_streamer, VideoTransformerBase
 
 def main():
-    set_page_logo("/home/govind/Downloads/MLPR_LucidLens/logo.jpg")
+    set_page_logo("logo.jpg")
     st.title("Welcome to LucidLens Platform")
     NavForAll()
     st.write("")
@@ -28,7 +28,7 @@ def main():
             with open(image_path, "wb") as f:
                 f.write(uploaded_file.read())
             show_uploaded_image(image_path)
-            mapping_path = "/home/govind/Downloads/MLPR_LucidLens/mapping.pkl"
+            mapping_path = "mapping.pkl"
             caption = run_main(image_path, mapping_path)  # Renamed here
             st.subheader("Generated Caption:")
             st.write(caption)
@@ -60,7 +60,7 @@ def capture_photo_and_generate_caption():
                 # Show the captured image
                 show_uploaded_image(image_path)
                 # Generate caption for the captured image
-                mapping_path = "/home/govind/Downloads/MLPR_LucidLens/mapping.pkl"
+                mapping_path = "mapping.pkl"
                 caption = run_main(image_path, mapping_path)
                 st.subheader("Generated Caption:")
                 st.write(caption)
