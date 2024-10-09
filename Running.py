@@ -13,33 +13,12 @@ from PIL import Image
 import cv2
 from streamlit_webrtc import VideoTransformerBase
 import streamlit as st
-import gdown
 
 class VideoTransformer(VideoTransformerBase):
     def __init__(self):
-        self.model_path = "fastest_model.keras"
-        
-        # Check if the model file exists, otherwise download it
-        if not os.path.exists(self.model_path):
-            url = 'https://drive.google.com/uc?id=19pACqei0GBVA4DJsNWJq025oxMUsooqT'  # Corrected download link
-            output = self.model_path
-            print("Downloading model...")
-            gdown.download(url, output, quiet=False)
-        
-        # Check again if the file exists after the download
-        if not os.path.exists(self.model_path):
-            raise FileNotFoundError(f"Model file not found at {self.model_path}. Download failed or file is missing.")
-        
-        # Print the files in the current directory to check
-        print("Files in the current directory:", os.listdir(os.getcwd()))
-
-        # Now load the model
-        try:
-            self.model = tf.keras.models.load_model(self.model_path)
-        except Exception as e:
-            raise ValueError(f"Failed to load the model: {str(e)}")
-        
+        self.model_path = "fastest_model.keras"  # Update with your model path
         self.mapping_path = "mapping.pkl"  # Update with your mapping path
+        self.model = tf.keras.models.load_model(self.model_path)
         self.mapping = self.load_mapping(self.mapping_path)
         self.tokenizer = self.create_tokenizer(self.mapping)
 
@@ -87,6 +66,8 @@ class VideoTransformer(VideoTransformerBase):
         caption = caption.replace('startseq', '').strip()
         return caption
 
+
+
     def generate_audio(self, caption, language='en', output_dir='audio_files', output_file='generated_audio1.mp3'):
         os.makedirs(output_dir, exist_ok=True)
         output_path = os.path.join(output_dir, output_file)
@@ -122,17 +103,5 @@ def main(image_file, mapping_path):
     return caption
 
 
-if __name__ == "__main__":
-    # Example usage in Streamlit or another app
-    uploaded_file = st.file_uploader("Upload an image", type=["jpg", "jpeg", "png"])
-    if uploaded_file is not None:
-        image_path = os.path.join("uploaded_images", uploaded_file.name)
-        with open(image_path, "wb") as f:
-            f.write(uploaded_file.read())
-        show_uploaded_image(uploaded_file)
-        mapping_path = "mapping.pkl"  # Ensure this file is present
-        caption = main(image_path, mapping_path)
-        st.subheader("Generated Caption:")
-        st.write(caption)
 
 
