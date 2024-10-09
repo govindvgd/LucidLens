@@ -6,3 +6,4 @@ opencv-python-headless>=4.5
 pillow>=8.3
 numpy>=1.21
 streamlit_webrtc
+gdown

@@ -13,10 +13,15 @@ from PIL import Image
 import cv2
 from streamlit_webrtc import VideoTransformerBase
 import streamlit as st
+import gdown
 
 class VideoTransformer(VideoTransformerBase):
     def __init__(self):
-        self.model_path = "fastest_model.keras"  # Update with your model path
+        # self.model_path = "fastest_model.keras"  # Update with your model path
+        if not os.path.exists("fastest_model.keras"):
+            url = 'https://drive.google.com/file/d/19pACqei0GBVA4DJsNWJq025oxMUsooqT/view?usp=sharing>'
+            output = 'fastest_model.keras'
+            gdown.download(url, output, quiet=False)
         self.mapping_path = "mapping.pkl"  # Update with your mapping path
         self.model = tf.keras.models.load_model(self.model_path)
         self.mapping = self.load_mapping(self.mapping_path)
