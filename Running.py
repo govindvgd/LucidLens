@@ -17,11 +17,14 @@ import gdown
 
 class VideoTransformer(VideoTransformerBase):
     def __init__(self):
-        # self.model_path = "fastest_model.keras"  # Update with your model path
-        if not os.path.exists("fastest_model.keras"):
-            url = 'https://drive.google.com/file/d/19pACqei0GBVA4DJsNWJq025oxMUsooqT/view?usp=sharing>'
-            output = 'fastest_model.keras'
+        self.model_path = "fastest_model.keras"
+        
+        # Check if the model file exists, otherwise download it
+        if not os.path.exists(self.model_path):
+            url = 'https://drive.google.com/uc?id=19pACqei0GBVA4DJsNWJq025oxMUsooqT'  # Corrected download link
+            output = self.model_path
             gdown.download(url, output, quiet=False)
+        
         self.mapping_path = "mapping.pkl"  # Update with your mapping path
         self.model = tf.keras.models.load_model(self.model_path)
         self.mapping = self.load_mapping(self.mapping_path)
@@ -70,8 +73,6 @@ class VideoTransformer(VideoTransformerBase):
         # Remove the "startseq" token from the final caption
         caption = caption.replace('startseq', '').strip()
         return caption
-
-
 
     def generate_audio(self, caption, language='en', output_dir='audio_files', output_file='generated_audio1.mp3'):
         os.makedirs(output_dir, exist_ok=True)
