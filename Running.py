@@ -16,8 +16,8 @@ import streamlit as st
 
 class VideoTransformer(VideoTransformerBase):
     def __init__(self):
-        self.model_path = "/home/govind/Downloads/MLPR_LucidLens/fastest_model.keras"  # Update with your model path
-        self.mapping_path = "/home/govind/Downloads/MLPR_LucidLens/mapping.pkl"  # Update with your mapping path
+        self.model_path = "fastest_model.keras"  # Update with your model path
+        self.mapping_path = "mapping.pkl"  # Update with your mapping path
         self.model = tf.keras.models.load_model(self.model_path)
         self.mapping = self.load_mapping(self.mapping_path)
         self.tokenizer = self.create_tokenizer(self.mapping)
