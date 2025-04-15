@@ -1,7 +1,7 @@
 # LucidLens: Real-Time Image Captioning Platform
 
 ## Overview
-LucidLens is a project that provides real-time image captioning using a pre-trained VGG16 model and a custom-trained caption generation model. It allows users to upload images, capture photos via webcam, or process video input to generate descriptive captions, which are then converted to speech.
+LucidLens is a project that provides real-time image captioning using a pre-trained VGG16 model and a custom-trained caption generation model. It allows users to upload images, capture photos via webcam, or process video input to generate descriptive captions which are then converted to speech.
 
 ## Features
 * **Image Captioning:** Generates descriptive captions for images using a deep learning model.
