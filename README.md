@@ -28,7 +28,7 @@ LucidLens is a project that provides real-time image captioning using a pre-trai
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/govindvgd/LucidLens.git
-cd LucidLens
+cd LucidLens 
 ```
 
 ### 2. Install Dependencies
